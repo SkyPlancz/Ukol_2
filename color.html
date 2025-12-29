@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Změna barvy nadpisu</title>
+  <style>
+    body { font-family: "Segoe UI", Tahoma, sans-serif; margin: 2rem; color: #0f172a; }
+    h1 { cursor: pointer; transition: color 0.2s ease; }
+    p { max-width: 640px; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1 id="heading">Klikni na mě</h1>
+    <p>Po kliknutí se barva nadpisu změní na zelenou na 5 sekund a pak se vrátí zpět na černou.</p>
+  </main>
+
+  <script>
+    const heading = document.getElementById('heading');
+    let revertTimer = null;
+
+    function setHeadingColor(color) {
+      heading.style.color = color;
+    }
+
+    function handleClick() {
+      setHeadingColor('green');
+
+      if (revertTimer !== null) {
+        clearTimeout(revertTimer);
+      }
+
+      revertTimer = setTimeout(() => {
+        setHeadingColor('black');
+        revertTimer = null;
+      }, 5000);
+    }
+
+    heading.addEventListener('click', handleClick);
+  </script>
+</body>
+</html>
