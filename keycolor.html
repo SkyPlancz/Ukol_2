@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Barva nadpisu podle klávesy</title>
+  <style>
+    body { font-family: "Segoe UI", Tahoma, sans-serif; margin: 2rem; color: #0f172a; }
+    h1 { transition: color 0.2s ease; }
+    ul { padding-left: 1.2rem; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1 id="title">Stiskni klávesu b/r/g/p/w/v/o</h1>
+    <p>Změň barvu nadpisu stiskem vybraných kláves:</p>
+    <ul>
+      <li>b = modrá</li>
+      <li>r = červená</li>
+      <li>g = zelená</li>
+      <li>p = růžová</li>
+      <li>w = bílá</li>
+      <li>v = fialová</li>
+      <li>o = oranžová</li>
+    </ul>
+  </main>
+
+  <script>
+    const title = document.getElementById('title');
+
+    const colors = {
+      b: 'blue',
+      r: 'red',
+      g: 'green',
+      p: 'pink',
+      w: 'white',
+      v: 'violet',
+      o: 'orange',
+    };
+
+    function handleKeydown(event) {
+      const key = event.key.toLowerCase();
+      if (colors[key]) {
+        title.style.color = colors[key];
+      }
+    }
+
+    document.addEventListener('keydown', handleKeydown);
+  </script>
+</body>
+</html>
