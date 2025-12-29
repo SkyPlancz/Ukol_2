@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Objekt zvířete</title>
+  <style>
+    body { font-family: "Segoe UI", Tahoma, sans-serif; margin: 2rem; color: #0f172a; }
+    main { max-width: 640px; }
+    pre { background: #f8fafc; padding: 1rem; border: 1px solid #e2e8f0; border-radius: 6px; overflow-x: auto; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Ukázka objektu zvířete</h1>
+    <p>Objekt používá alespoň 6 vlastností a 3 různé datové typy (string, number, boolean, pole, vnořený objekt). Také se vypíše do konzole.</p>
+    <pre id="output"></pre>
+  </main>
+
+  <script>
+    const animal = {
+      name: 'Mina',
+      species: 'kočka',
+      age: 3,
+      weightKg: 4.2,
+      vaccinated: true,
+      favoriteFoods: ['tuňák', 'kuře', 'losos'],
+      owner: {
+        name: 'Eva',
+        city: 'Brno',
+      },
+    };
+
+    console.log('Objekt zvířete:', animal);
+    document.getElementById('output').textContent = JSON.stringify(animal, null, 2);
+  </script>
+</body>
+</html>
