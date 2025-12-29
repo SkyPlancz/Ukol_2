@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Barevná kolečka</title>
+  <style>
+    body { font-family: "Segoe UI", Tahoma, sans-serif; margin: 2rem; color: #0f172a; }
+    main { max-width: 720px; }
+    form { margin-bottom: 1rem; display: flex; gap: 0.5rem; flex-wrap: wrap; align-items: center; }
+    input[type="text"] { padding: 0.5rem; min-width: 140px; }
+    button { padding: 0.5rem 1rem; cursor: pointer; }
+    #error { color: #c00; min-height: 1.2em; }
+    #canvas { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+    .dot { width: 44px; height: 44px; border-radius: 50%; border: 1px solid #e2e8f0; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Přidej barevná kolečka</h1>
+    <p>Zadej barvu jako hex (např. #AA2F19) a odešli. Každé odeslání přidá nové kolečko.</p>
+
+    <form id="color-form">
+      <label for="color">Barva (hex):</label>
+      <input id="color" name="color" type="text" placeholder="#AA2F19" autocomplete="off">
+      <button type="submit">Přidat kolečko</button>
+      <span id="error"></span>
+    </form>
+
+    <div id="canvas"></div>
+  </main>
+
+  <script>
+    const form = document.getElementById('color-form');
+    const input = document.getElementById('color');
+    const error = document.getElementById('error');
+    const canvas = document.getElementById('canvas');
+
+    function isValidHex(value) {
+      return /^#([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$/.test(value.trim());
+    }
+
+    function addDot(color) {
+      const dot = document.createElement('div');
+      dot.className = 'dot';
+      dot.style.backgroundColor = color;
+      canvas.appendChild(dot);
+    }
+
+    form.addEventListener('submit', event => {
+      event.preventDefault();
+      const value = input.value.trim();
+
+      if (!isValidHex(value)) {
+        error.textContent = 'Zadejte platný hex kód (např. #AA2F19 nebo #F80).';
+        return;
+      }
+
+      error.textContent = '';
+      addDot(value);
+      input.value = '';
+      input.focus();
+    });
+  </script>
+</body>
+</html>
