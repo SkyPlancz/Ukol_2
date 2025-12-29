@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Zadejte své jméno</title>
+  <style>
+    body { font-family: "Segoe UI", Tahoma, sans-serif; margin: 2rem; color: #0f172a; }
+    main { max-width: 520px; }
+    label { display: block; margin-bottom: 0.5rem; font-weight: 600; }
+    input { padding: 0.5rem; width: 100%; max-width: 260px; }
+    button { margin-top: 0.75rem; padding: 0.5rem 1rem; cursor: pointer; }
+    #output { margin-top: 1rem; font-size: 1.1rem; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Zapiš své jméno do titulku</h1>
+    <p>Po zadání jména se text přepíše v titulku stránky i tady v obsahu.</p>
+
+    <label for="name">Jméno</label>
+    <input id="name" type="text" placeholder="např. Petra">
+    <button id="set-title" type="button">Nastavit titulek</button>
+    <div id="output"></div>
+  </main>
+
+  <script>
+    const input = document.getElementById('name');
+    const button = document.getElementById('set-title');
+    const output = document.getElementById('output');
+
+    function setTitle() {
+      const name = input.value.trim();
+      if (!name) {
+        output.textContent = 'Zadejte prosím jméno.';
+        return;
+      }
+      document.title = name;
+      output.textContent = `Titulek nastaven na: ${name}`;
+    }
+
+    button.addEventListener('click', setTitle);
+    input.addEventListener('keydown', event => {
+      if (event.key === 'Enter') {
+        setTitle();
+      }
+    });
+  </script>
+</body>
+</html>
