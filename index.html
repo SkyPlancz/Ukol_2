@@ -3,9 +3,84 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Stránka odstraněna</title>
+  <title>Odpočet do 0</title>
+  <style>
+    body { font-family: "Segoe UI", Tahoma, sans-serif; margin: 2rem; color: #0f172a; }
+    main { max-width: 520px; }
+    label { display: block; margin-bottom: 0.5rem; font-weight: 600; }
+    input { padding: 0.5rem; width: 100%; max-width: 220px; }
+    button { margin-top: 0.75rem; padding: 0.5rem 1rem; cursor: pointer; }
+    #error { color: #c00; margin-top: 0.5rem; }
+    #output { margin-top: 1rem; white-space: pre-line; font-family: Consolas, "Courier New", monospace; }
+  </style>
 </head>
 <body>
-  <p>Původní generátor náhodných let byl na žádost odstraněn.</p>
+  <main>
+    <h1>Odpočet s pozdravem</h1>
+    <p>Zadejte libovolné kladné číslo. Každou sekundu se vypíše o 1 méně, až do 0, pak se přidá zpráva "Happy new year!".</p>
+
+    <label for="count">Počet pro odpočet</label>
+    <input id="count" type="number" min="1" placeholder="např. 7">
+    <button id="start" type="button">Spustit odpočet</button>
+    <div id="error" role="alert"></div>
+    <div id="output"></div>
+  </main>
+
+  <script>
+    const countInput = document.getElementById('count');
+    const startButton = document.getElementById('start');
+    const output = document.getElementById('output');
+    const error = document.getElementById('error');
+
+    let timerId = null;
+
+    function stopTimer() {
+      if (timerId !== null) {
+        clearInterval(timerId);
+        timerId = null;
+      }
+    }
+
+    function logLine(text) {
+      output.textContent += `${text}\n`;
+    }
+
+    function startCountdown() {
+      stopTimer();
+      output.textContent = '';
+      const value = Number.parseInt(countInput.value, 10);
+
+      if (!Number.isInteger(value) || value <= 0) {
+        error.textContent = 'Zadejte prosím kladné celé číslo.';
+        return;
+      }
+
+      error.textContent = '';
+      startButton.disabled = true;
+      countInput.disabled = true;
+
+      let current = value;
+      logLine(current);
+
+      timerId = setInterval(() => {
+        current -= 1;
+        logLine(current);
+
+        if (current <= 0) {
+          stopTimer();
+          logLine('Happy new year!');
+          startButton.disabled = false;
+          countInput.disabled = false;
+        }
+      }, 1000);
+    }
+
+    startButton.addEventListener('click', startCountdown);
+    countInput.addEventListener('keydown', event => {
+      if (event.key === 'Enter') {
+        startCountdown();
+      }
+    });
+  </script>
 </body>
 </html>
