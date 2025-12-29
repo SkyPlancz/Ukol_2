@@ -3,61 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Generátor náhodných letopočtů</title>
-  <style>
-    body { font-family: "Segoe UI", Tahoma, sans-serif; margin: 2rem; color: #0f172a; }
-    main { max-width: 520px; }
-    label { display: block; margin-bottom: 0.5rem; font-weight: 600; }
-    input { padding: 0.5rem; width: 100%; max-width: 240px; }
-    button { margin-top: 0.75rem; padding: 0.5rem 1rem; cursor: pointer; }
-    #error { color: #c00; margin-top: 0.5rem; }
-    #output { margin-top: 1rem; font-size: 1.1rem; }
-  </style>
+  <title>Stránka odstraněna</title>
 </head>
 <body>
-  <main>
-    <h1>Generátor náhodných letopočtů</h1>
-    <p>Zadejte, kolik náhodných let mezi 1992 a 2050 chcete vygenerovat, a klikněte na tlačítko.</p>
-
-    <label for="count">Počet letopočtů</label>
-    <input id="count" type="number" min="1" placeholder="např. 6">
-    <button id="generate" type="button">Vygenerovat</button>
-    <div id="error" role="alert"></div>
-    <div id="output"></div>
-  </main>
-
-  <script>
-    const MIN_YEAR = 1992;
-    const MAX_YEAR = 2050;
-
-    function getRandomYear() {
-      return Math.floor(Math.random() * (MAX_YEAR - MIN_YEAR + 1)) + MIN_YEAR;
-    }
-
-    const countInput = document.getElementById('count');
-    const output = document.getElementById('output');
-    const error = document.getElementById('error');
-
-    function generate() {
-      const count = Number.parseInt(countInput.value, 10);
-
-      if (!Number.isInteger(count) || count <= 0) {
-        error.textContent = 'Zadejte prosím kladné celé číslo.';
-        output.textContent = '';
-        return;
-      }
-
-      error.textContent = '';
-      const years = Array.from({ length: count }, getRandomYear);
-      output.textContent = years.join(', ');
-    }
-
-    document.getElementById('generate').addEventListener('click', generate);
-    countInput.addEventListener('keydown', event => {
-      if (event.key === 'Enter') {
-        generate();
-      }
-    });
-  </script>
+  <p>Původní generátor náhodných let byl na žádost odstraněn.</p>
 </body>
 </html>
