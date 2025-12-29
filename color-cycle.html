@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Plynulá změna pozadí</title>
+  <style>
+    body {
+      font-family: "Segoe UI", Tahoma, sans-serif;
+      margin: 2rem;
+      color: #0f172a;
+      transition: background-color 1s ease; /* zajistí plynulý přechod */
+    }
+    main { max-width: 640px; }
+    button { padding: 0.6rem 1.1rem; margin-right: 0.5rem; cursor: pointer; }
+    #status { margin-top: 1rem; font-weight: 600; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Plynulá změna barvy pozadí</h1>
+    <p>Start spustí náhodné barvy každé 3 sekundy, Stop je zastaví.</p>
+    <button id="start">Start</button>
+    <button id="stop">Stop</button>
+    <div id="status">Neaktivní</div>
+  </main>
+
+  <script>
+    const startBtn = document.getElementById('start');
+    const stopBtn = document.getElementById('stop');
+    const statusEl = document.getElementById('status');
+    let intervalId = null; // scope: uchovává id timeru, aby šel zastavit i při opakovaném kliku
+
+    function randomChannel() {
+      return Math.floor(Math.random() * 256);
+    }
+
+    function setRandomBackground() {
+      const color = `rgb(${randomChannel()}, ${randomChannel()}, ${randomChannel()})`;
+      document.body.style.backgroundColor = color;
+      statusEl.textContent = `Běží, aktuální barva: ${color}`;
+    }
+
+    function startCycle() {
+      if (intervalId !== null) return; // už běží
+      setRandomBackground();
+      intervalId = setInterval(setRandomBackground, 3000);
+    }
+
+    function stopCycle() {
+      if (intervalId === null) return;
+      clearInterval(intervalId);
+      intervalId = null;
+      statusEl.textContent = 'Neaktivní';
+    }
+
+    startBtn.addEventListener('click', startCycle);
+    stopBtn.addEventListener('click', stopCycle);
+  </script>
+</body>
+</html>
