@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prohoď text odstavců</title>
+  <style>
+    body { font-family: "Segoe UI", Tahoma, sans-serif; margin: 2rem; color: #0f172a; }
+    main { max-width: 640px; }
+    p { padding: 0.4rem 0; }
+    button { padding: 0.6rem 1rem; cursor: pointer; margin-top: 0.5rem; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Prohoď text mezi dvěma odstavci</h1>
+    <p id="p1">První odstavec s původním textem.</p>
+    <p id="p2">Druhý odstavec s jiným textem.</p>
+    <button id="swap">Prohodit text</button>
+  </main>
+
+  <script>
+    const p1 = document.getElementById('p1');
+    const p2 = document.getElementById('p2');
+    const swapBtn = document.getElementById('swap');
+
+    function swapText() {
+      const temp = p1.innerText; // uložíme původní text p1
+      p1.innerText = p2.innerText; // přepíšeme text p1
+      p2.innerText = temp; // dosadíme původní p1 do p2
+    }
+
+    swapBtn.addEventListener('click', swapText);
+  </script>
+</body>
+</html>
